@@ -1,17 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import Movie from "../Movie/Movie";
 
 
-const SelectedMovie = (state) => {
-  console.log("SELECTED", state)
+const SelectedMovie = state => {
+  console.log("SELECTED COMP", state)
   return (
     <div>
-      {state.selectedMovie?.selectedMovie ?
+      {state.selectedMovie ?
         (
           <>
-            <p>{state.selectedMovie.selectedMovie.title}</p>
-            <p>{state.selectedMovie.selectedMovie.year}</p>
+            <p>And the selected movie is: </p>
+            <p>{state.selectedMovie.title}</p>
+            <p>{state.selectedMovie.year}</p>
           </>
         ) :
         <p>nothing selected</p>
@@ -20,11 +20,11 @@ const SelectedMovie = (state) => {
   );
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
-    selectedMovie: state.selectedMovie
+    selectedMovie: state.movies.selectedMovie
   }
 }
 
-export default connect(mapStateToProps)(SelectedMovie)
+export default connect(mapStateToProps, null)(SelectedMovie)
 

@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import Movie from "../Movie/Movie";
 
 
-const MovieList = (state) => {
+const MovieList = state => {
   console.log("STATE", state)
   return (
-    state.movieList.movieList && state.movieList.movieList.length > 0 ?
+    state.movieList && state.movieList.length > 0 ?
       (
-        state.movieList.movieList.map(movie => <Movie movie={movie} key={movie.title} />)
+        state.movieList.map(movie => <Movie movie={movie} key={movie.title} />)
       ) :
       (<p>Nothing to see here</p>)
   )
@@ -16,9 +16,9 @@ const MovieList = (state) => {
 }
 
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
-    movieList: state.movieList
+    movieList: state.movies.movieList
   }
 }
 

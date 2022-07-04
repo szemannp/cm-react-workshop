@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectMovie } from '../MovieList/actions';
 
-const Movie = ({ movie }) => {
+const Movie = ({ movie, selectMovie }) => {
 
   const onMovieSelect = () => {
     selectMovie(movie)
-    console.log('MOVIE SELECTED', movie)
   }
 
   return (
@@ -17,9 +16,11 @@ const Movie = ({ movie }) => {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    selectMovie: movie => { dispatch(selectMovie(movie)) }
+    selectMovie: movie => {
+      dispatch(selectMovie(movie))
+    }
   }
 }
 

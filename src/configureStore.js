@@ -1,38 +1,29 @@
 import { applyMiddleware, compose, createStore } from "redux";
-import thunkMiddleware from "redux-thunk";
+import thunk from "redux-thunk";
 import { combineReducers } from "redux";
 
-import logger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 
-import { movieList, selectMovie } from "./components/MovieList/reducer";
-
-
-// initial APP state
-const initialState = {
-  movieList: [],
-  selectedMovie: {
-    title: '',
-    year: '',
-  }
-};
-
-const rootReducer = combineReducers({
-  movieList,
-  selectMovie,
-})
+import movieListReducer from "./components/MovieList/reducer";
 
 
 
 const configureStore = () => {
 
+  const rootReducer = combineReducers({
+    movies: movieListReducer
+  })
 
-  // const middleWares = [logger, thunkMiddleware]
-  // const middlewareEnhancer = applyMiddleware(...middleWares)
-  // const enhancers = [middlewareEnhancer]
+  const logger = createLogger()
 
-  // const composedEnhancers = compose(...enhancers)
-  // const store = createStore(rootReducer, initialState, composedEnhancers)
-  const store = createStore(rootReducer)
+  const middleWares = [logger, thunk]
+  const middlewareEnhancer = applyMiddleware(...middleWares)
+  const enhancers = [middlewareEnhancer]
+
+  const composedEnhancers = compose(...enhancers)
+  const store = createStore(rootReducer, {}, composedEnhancers)
+
+
   return store;
 }
 
