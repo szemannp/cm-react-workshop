@@ -13,12 +13,9 @@ const movieListInitialState = {
 }
 
 function movieListReducer(state = movieListInitialState, action) {
-  console.log("REDUCER", action)
-  console.log("REDUCER STATE", state)
   switch (action.type) {
     case SELECT_MOVIE:
       return { ...state, selectedMovie: action.payload }
-    // return state.selectedMovie = action.payload
     default:
       return state;
   }

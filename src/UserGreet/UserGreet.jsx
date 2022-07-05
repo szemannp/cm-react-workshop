@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function UserGreet(props) {
   return (
@@ -10,7 +11,7 @@ export default function UserGreet(props) {
         <p>for FUN</p>
       </div>
       <div>
-        <p>for fragments</p>
+        <Link to={'/movielist'}>Movie List</Link>
       </div>
     </>
   )

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 
 const SelectedMovie = state => {
-  console.log("SELECTED COMP", state)
   return (
     <div>
       {state.selectedMovie ?

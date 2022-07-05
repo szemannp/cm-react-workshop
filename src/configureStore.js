@@ -20,7 +20,11 @@ const configureStore = () => {
   const middlewareEnhancer = applyMiddleware(...middleWares)
   const enhancers = [middlewareEnhancer]
 
-  const composedEnhancers = compose(...enhancers)
+
+  // redux devtools chrome extension
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+  const composedEnhancers = composeEnhancers(...enhancers)
   const store = createStore(rootReducer, {}, composedEnhancers)
 
 
