@@ -1,24 +1,30 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import Button from 'react-bootstrap/Button';
 
-import { API_KEY } from '../../config'
+import { Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { searchMovie } from './thunks';
+import { addMovieToList } from './actions';
 
-const Search = () => {
+const Search = ({
+  searchedMovie,
+  addMovieToList,
+  searchMovie
+}) => {
 
-  const [searchTitle, setSearchTitle] = useState('')
-  const [result, setResult] = useState('')
+  const [title, setTitle] = useState('')
 
   const onSearchValue = event => {
-    setSearchTitle(event.target.value)
+    setTitle(event.target.value)
   }
 
   const onSearchClick = () => {
-    const url = `http://www.omdbapi.com/?apikey=${API_KEY}&t=${searchTitle}`
-    axios.get(url)
-      .then(response => setResult(response.data))
-      .catch(error => console.log("ERROR", error))
+    searchMovie(title)
   }
 
+  const onAddToListClick = () => {
+    addMovieToList(searchedMovie)
+  }
 
   return (
     <div>
@@ -29,21 +35,51 @@ const Search = () => {
         style={{ width: '200px', height: '40px' }}
         onChange={onSearchValue}
       />
-      <button onClick={onSearchClick}>Search</button>
-      <p>{searchTitle}</p>
+      <Row className="mx-6">
+        <Col>
+          <Button
+            onClick={onSearchClick}
+            variant="primary"
+          >
+            Search
+          </Button>
+        </Col>
+        <Col>
+          <Button
+            onClick={onAddToListClick}
+            variant="primary"
+          >
+            Add to List
+          </Button>
+        </Col>
+      </Row>
+      <p>{title}</p>
       <br></br>
       <br></br>
       <br></br>
       <br></br>
       <div>
-        <p>{`Title: ${result.Title}`}</p>
-        <p>{`Release date: ${result.Released}`}</p>
-        <p>{`Rated: ${result.Rated}`}</p>
-        <p>{`Runtime: ${result.Runtime}`}</p>
-        <p>{`Genre: ${result.Genre}`}</p>
+        <p>{`Title: ${searchedMovie.Title}`}</p>
+        <p>{`Release date: ${searchedMovie.Released}`}</p>
+        <p>{`Rated: ${searchedMovie.Rated}`}</p>
+        <p>{`Runtime: ${searchedMovie.Runtime}`}</p>
+        <p>{`Genre: ${searchedMovie.Genre}`}</p>
       </div>
     </div>
   )
 }
 
-export default Search
+const mapStateToProps = state => {
+  return {
+    searchedMovie: state.searchedMovie
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addMovieToList: movie => dispatch(addMovieToList(movie)),
+    searchMovie: title => dispatch(searchMovie(title))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

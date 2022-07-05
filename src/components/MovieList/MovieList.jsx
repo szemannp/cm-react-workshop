@@ -4,7 +4,6 @@ import Movie from "../Movie/Movie";
 
 
 const MovieList = state => {
-  console.log("STATE", state)
   return (
     state.movieList && state.movieList.length > 0 ?
       (

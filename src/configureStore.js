@@ -5,13 +5,15 @@ import { combineReducers } from "redux";
 import { createLogger } from 'redux-logger';
 
 import movieListReducer from "./components/MovieList/reducer";
+import searchReducer from "./components/Search/reducer";
 
 
 
 const configureStore = () => {
 
   const rootReducer = combineReducers({
-    movies: movieListReducer
+    movies: movieListReducer,
+    searchedMovie: searchReducer
   })
 
   const logger = createLogger()

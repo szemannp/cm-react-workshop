@@ -10,8 +10,8 @@ const Movie = ({ movie, selectMovie }) => {
 
   return (
     <div onClick={onMovieSelect}>
-      <p>{movie?.title}</p>
-      <p>{movie?.year}</p>
+      <p>{movie?.Title}</p>
+      <p>{movie?.Year}</p>
     </div>
   );
 }

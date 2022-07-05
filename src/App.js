@@ -9,7 +9,7 @@ import UserGreet from './UserGreet/UserGreet';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App ml-3">
       <BrowserRouter>
         <Header />
         <Routes>

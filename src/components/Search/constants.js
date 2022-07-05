@@ -1,0 +1,3 @@
+export const ADD_MOVIE_TO_LIST = 'ADD_MOVIE_TO_LIST'
+export const SEARCH_SUCCESS = 'SEARCH_SUCCESS'
+export const SEARCH_ERROR = 'SEARCH_ERROR'
